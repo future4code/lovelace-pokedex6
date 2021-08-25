@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 
 const useGetPokemons = () => {
   const [pokemons, setPokemons] = useState([])
   const [error, setError] = useState(undefined)
 
-  const baseUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=5&limit=20'
+  const baseUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=5&limit=16'
 
   let response
   const getPokemons = async () => {
@@ -14,7 +14,7 @@ const useGetPokemons = () => {
     } catch (err) {
       setError(err)
     } finally {
-      setPokemons(response.data.results)
+      setPokemons(response.data.results.map((pokemon)=>pokemon.name))
     }
   }
 

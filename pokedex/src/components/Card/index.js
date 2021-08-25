@@ -1,12 +1,21 @@
-import React from 'react'
-import Pokemonzinho from '../../img/pokemonzinho.jpg'
+import React, { useEffect } from 'react'
 import { PokemonCard } from './styles'
+import { useHistory } from 'react-router-dom'
+import useGetDetails from '../../services/useGetDetails'
 
 const Card = (props) => {
+  const history = useHistory()
+
+  const { details, getDetails } = useGetDetails()
+  useEffect(() => {
+    getDetails(props.pokemon)
+  }, [])
+
   return (
     <PokemonCard>
-      {<h3>{props.pokemon.name}</h3>}
-      <img src={Pokemonzinho} alt='Bulbassauro' />
+      <h3>{props.pokemon}</h3>
+      <img src={details.sprites?.front_default} alt={details?.name} />
+
       <div>
         <button>Adicionar à Pokedex</button>
         <button>Mais detalhes</button>
