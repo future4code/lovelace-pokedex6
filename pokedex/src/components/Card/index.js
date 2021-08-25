@@ -10,11 +10,10 @@ const Card = (props) => {
   useEffect(() => {
     getDetails(props.pokemon)
   }, [])
-
   return (
     <PokemonCard>
       <h3>{props.pokemon}</h3>
-      <img src={details.sprites?.front_default} alt={details?.name} />
+      <img src={details.img?.front} alt={details?.name} />
 
       <div>
         <button>Adicionar à Pokedex</button>
