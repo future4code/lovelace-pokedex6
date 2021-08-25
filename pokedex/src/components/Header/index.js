@@ -1,11 +1,15 @@
 import React from 'react'
+import * as S from './styles'
 
-const Header = () => {
+const Header = (props) => {
   return (
-    <header>
-      <button>Ir para a Pokédex</button>
-      Lista de pokemons
-    </header>
+    <S.Header>
+      <button onClick={props.onClickButton}>{props.buttonName}</button>
+      <h1>{props.title}</h1>
+      {props.onClickButton2 && (
+        <button onClick={props.onClickButton2}>{props.button2Name}</button>
+      )}
+    </S.Header>
   )
 }
 

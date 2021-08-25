@@ -17,7 +17,7 @@ const Card = (props) => {
 
       <div>
         <button>Adicionar à Pokedex</button>
-        <button>Mais detalhes</button>
+        <button onClick={() =>history.push(`/pokemon/${props.pokemon}`)}>Mais detalhes</button>
       </div>
     </PokemonCard>
   )

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import useGetDetails from '../../services/useGetDetails'
-// import History from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import Header from '../../components/Header/index'
+import { useHistory } from 'react-router-dom'
 
 const Details = () => {
+  const history = useHistory()
   const { details, getDetails, error } = useGetDetails()
   const pathParams = useParams()
 
@@ -13,6 +15,13 @@ const Details = () => {
 
   return (
     <>
+      <Header
+        buttonName='Voltar'
+        title={pathParams.name}
+        onClickButton={() => history.push('/')}
+        onClickButton2={() => history.push('/pokedex')}
+        button2Name='Ir para a Pokedex'
+      />
       {!error ? (
         <>
           <div>Nome: {details?.name}</div>
