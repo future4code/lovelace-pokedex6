@@ -1,12 +1,12 @@
 import react from 'react'
-import Card from './components/Card/index.js'
+import Header from './components/Header'
 import Router from './routes'
 
 function App() {
   return (
     <div>
+      <Header/>
       <Router />
-      <Card />
     </div>
   )
 }
