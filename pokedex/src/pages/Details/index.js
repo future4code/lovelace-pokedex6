@@ -1,45 +1,55 @@
 import React, { useEffect, useState } from 'react'
-import useGetDetails from '../../services/useGetDetails'
 import { useParams } from 'react-router-dom'
 import Header from '../../components/Header/index'
 import { useHistory } from 'react-router-dom'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
 const Details = () => {
+  const { globalDetails } = React.useContext(GlobalContext)
+
+  const [actualPokemon, setActualPokemon] = useState({})
+
   const history = useHistory()
-  const { details, getDetails, error } = useGetDetails()
-  const pathParams = useParams()
+  const { name } = useParams()
 
   useEffect(() => {
-    getDetails(pathParams.name)
-  }, [])
+    console.log(globalDetails)
+    if (globalDetails.length > 0) {
+      console.log(globalDetails)
+      setActualPokemon(
+        globalDetails.filter((pokemon) => pokemon.name === name)[0]
+      )
+    }
+  }, [globalDetails])
+
 
   return (
     <>
       <Header
         buttonName='Voltar'
-        title={pathParams.name}
+        title={name}
         onClickButton={() => history.push('/')}
         onClickButton2={() => history.push('/pokedex')}
         button2Name='Ir para a Pokedex'
       />
-      {!error ? (
+      {actualPokemon.name ? (
         <>
-          <div>Nome: {details?.name}</div>
-          <img src={details.img?.front} alt={details?.name} />
-          <img src={details.img?.back} alt={details?.name} />
+          <div>Nome: {actualPokemon.name}</div>
+          <img src={actualPokemon.img?.front} alt={actualPokemon?.name} />
+          <img src={actualPokemon.img?.back} alt={actualPokemon?.name} />
           <div>
             <p>Poderes</p>
-            <p>HP: {details.power?.hp}</p>
-            <p>Attack: {details.power?.attack}</p>
-            <p>Defense: {details.power?.defense}</p>
-            <p>Special Attack: {details.power?.specialAttack}</p>
-            <p>Special Defense: {details.power?.specialDefense}</p>
-            <p>Speed: {details.power?.speed}</p>
+            <p>HP: {actualPokemon.power?.hp}</p>
+            <p>Attack: {actualPokemon.power?.attack}</p>
+            <p>Defense: {actualPokemon.power?.defense}</p>
+            <p>Special Attack: {actualPokemon.power?.specialAttack}</p>
+            <p>Special Defense: {actualPokemon.power?.specialDefense}</p>
+            <p>Speed: {actualPokemon.power?.speed}</p>
           </div>
           <div>
             <p>Tipos</p>
             <p>
-              {details.types?.map((type) => (
+              {actualPokemon.types?.map((type) => (
                 <li key={type}>{type}</li>
               ))}
             </p>
@@ -47,7 +57,7 @@ const Details = () => {
           <div>
             <p>Principais ataques</p>
             <p>
-              {details.moves?.map((move) => (
+              {actualPokemon.moves?.map((move) => (
                 <li key={move}>{move}</li>
               ))}
             </p>

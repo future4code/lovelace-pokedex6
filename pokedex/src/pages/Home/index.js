@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Card from '../../components/Card/index'
-import useGetPokemons from '../../services/useGetPokemons'
-import useGetDetails from '../../services/useGetDetails'
 import { PokemonGrid } from './styles'
 import Header from '../../components/Header'
 import { useHistory } from 'react-router-dom'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
 const Home = () => {
+  const { globalDetails } = React.useContext(GlobalContext)
   const history = useHistory()
-
-  const { pokemons, getPokemons } = useGetPokemons()
-  const { details, getDetails } = useGetDetails()
-
-  useEffect(() => {
-    getPokemons()
-  }, [])
 
   return (
     <>
@@ -24,9 +17,10 @@ const Home = () => {
         onClickButton={() => history.push('/pokedex')}
       />
       <PokemonGrid>
-        {pokemons.map((pokemon) => (
-          <Card key={pokemon} pokemon={pokemon} />
-        ))}
+        {globalDetails.length > 0 &&
+          globalDetails.map((pokemon) => (
+            <Card key={pokemon.name} pokemon={pokemon} />
+          ))}
       </PokemonGrid>
     </>
   )
