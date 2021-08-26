@@ -7,14 +7,11 @@ const useGetDetails = () => {
 
   const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
-  const getDetails = async (name) => {
+  const getDetails = React.useCallback(async (name) => {
     let response
     try {
       response = await axios.get(`${baseUrl}${name}`)
-    } catch (err) {
-      setError(err)
-    } finally {
-      setDetails({
+      return ({
         name: response?.data.name,
         power: {
           hp: response?.data.stats[0].base_stat,
@@ -31,8 +28,12 @@ const useGetDetails = () => {
           back: response?.data.sprites.back_default,
         },
       })
+    } catch (err) {
+      setError(err)
+    } finally {
+      
     }
-  }
+  },[])
 
   return { getDetails, details, error }
 }
