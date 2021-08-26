@@ -5,28 +5,29 @@ import { useHistory } from 'react-router-dom'
 import { GlobalContext } from '../../contexts/GlobalContext'
 
 const Details = () => {
-  const { globalDetails } = React.useContext(GlobalContext)
+  const { globalDetails, pokedex } = React.useContext(GlobalContext)
 
   const [actualPokemon, setActualPokemon] = useState({})
 
   const history = useHistory()
   const { name } = useParams()
 
+  const findPokemon = (state) => {
+    return state.filter((pokemon) => pokemon.name === name)[0]
+  }
+
   useEffect(() => {
-    console.log(globalDetails)
-    if (globalDetails.length > 0) {
-      console.log(globalDetails)
-      setActualPokemon(
-        globalDetails.filter((pokemon) => pokemon.name === name)[0]
-      )
+    if (findPokemon(globalDetails)) {
+      setActualPokemon(findPokemon(globalDetails))
+    } else {
+      setActualPokemon(findPokemon(pokedex))
     }
   }, [globalDetails])
-
 
   return (
     <>
       <Header
-        buttonName='Voltar'
+        buttonName='Ir para a lista de Pokémons'
         title={name}
         onClickButton={() => history.push('/')}
         onClickButton2={() => history.push('/pokedex')}
@@ -34,7 +35,7 @@ const Details = () => {
       />
       {actualPokemon.name ? (
         <>
-          <div>Nome: {actualPokemon.name}</div>
+          <div>Nome: {actualPokemon?.name}</div>
           <img src={actualPokemon.img?.front} alt={actualPokemon?.name} />
           <img src={actualPokemon.img?.back} alt={actualPokemon?.name} />
           <div>

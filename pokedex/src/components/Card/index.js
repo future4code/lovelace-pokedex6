@@ -1,20 +1,27 @@
 import React from 'react'
 import { PokemonCard } from './styles'
 import { useHistory } from 'react-router-dom'
+import { GlobalContext } from '../../contexts/GlobalContext'
 
-const Card = (props) => {
+const Card = ({ pokemon, addPokemon, buttonName }) => {
+  const {  } =
+    React.useContext(GlobalContext)
+
   const history = useHistory()
 
   return (
     <PokemonCard>
-      <h3>
-        {props.pokemon?.name}
-        </h3>
-      <img src={props.pokemon?.img.front} alt={props.pokemon?.name} />
-
+      <h3>{pokemon?.name}</h3>
+      <img src={pokemon?.img.front} alt={pokemon?.name} />
       <div>
-        <button>Adicionar à Pokedex</button>
-        <button onClick={() =>history.push(`/pokemon/${props.pokemon.name}`)}>Mais detalhes</button>
+        <button
+          onClick={() => addPokemon(pokemon)}
+        >
+          {buttonName}
+        </button>
+        <button onClick={() => history.push(`/pokemon/${pokemon.name}`)}>
+          Mais detalhes
+        </button>
       </div>
     </PokemonCard>
   )
