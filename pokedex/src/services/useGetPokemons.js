@@ -5,7 +5,7 @@ const useGetPokemons = () => {
   const [pokemons, setPokemons] = useState([])
   const [error, setError] = useState(undefined)
 
-  const baseUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=12'
+  const baseUrl = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
 
   let response
   const getPokemons = async () => {

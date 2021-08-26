@@ -7,7 +7,9 @@ const Header = (props) => {
       <button onClick={props.onClickButton}>{props.buttonName}</button>
       <h1>{props.title}</h1>
       {props.button2Name && (
-        <button onClick={props.onClickButton2}>{props.button2Name}</button>
+        <button onClick={props.onClickButton2}>
+          {props.button2Name}
+        </button>
       )}
     </S.Header>
   )

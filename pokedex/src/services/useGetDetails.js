@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const useGetDetails = () => {
-  const [details, setDetails] = useState({})
-  const [error, setError] = useState(undefined)
-
   const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
   const getDetails = React.useCallback(async (name) => {
@@ -28,14 +25,12 @@ const useGetDetails = () => {
           back: response?.data.sprites.back_default,
         },
       })
-    } catch (err) {
-      setError(err)
     } finally {
       
     }
   },[])
 
-  return { getDetails, details, error }
+  return { getDetails }
 }
 
 export default useGetDetails
