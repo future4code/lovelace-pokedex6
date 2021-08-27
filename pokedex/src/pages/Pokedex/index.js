@@ -21,7 +21,7 @@ const Pokedex = () => {
   return (
     <>
       <Header
-        buttonName='Voltar para a lista de Pokémons'
+        buttonName='Lista de Pokémons'
         title='Pokédex'
         onClickButton={() => history.push('/')}
       />
