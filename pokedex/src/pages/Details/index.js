@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Header from '../../components/Header/index'
 import { useHistory } from 'react-router-dom'
 import { GlobalContext } from '../../contexts/GlobalContext'
+import { DetailsTipos, PokemonDetails, TextDetails } from './styles'
 
 const Details = () => {
   const { globalDetails, pokedex } = React.useContext(GlobalContext)
@@ -35,20 +36,20 @@ const Details = () => {
       />
       {actualPokemon.name ? (
         <>
-          <div>Nome: {actualPokemon?.name}</div>
+          <PokemonDetails>Nome: {actualPokemon?.name}</PokemonDetails>
           <img src={actualPokemon.img?.front} alt={actualPokemon?.name} />
           <img src={actualPokemon.img?.back} alt={actualPokemon?.name} />
+          <PokemonDetails>
+            <TextDetails>Poderes</TextDetails>
+            <TextDetails>HP: {actualPokemon.power?.hp}</TextDetails>
+            <TextDetails>Attack: {actualPokemon.power?.attack}</TextDetails>
+            <TextDetails>Defense: {actualPokemon.power?.defense}</TextDetails>
+            <TextDetails>Special Attack: {actualPokemon.power?.specialAttack}</TextDetails>
+            <TextDetails>Special Defense: {actualPokemon.power?.specialDefense}</TextDetails>
+            <TextDetails>Speed: {actualPokemon.power?.speed}</TextDetails>
+          </PokemonDetails>
           <div>
-            <p>Poderes</p>
-            <p>HP: {actualPokemon.power?.hp}</p>
-            <p>Attack: {actualPokemon.power?.attack}</p>
-            <p>Defense: {actualPokemon.power?.defense}</p>
-            <p>Special Attack: {actualPokemon.power?.specialAttack}</p>
-            <p>Special Defense: {actualPokemon.power?.specialDefense}</p>
-            <p>Speed: {actualPokemon.power?.speed}</p>
-          </div>
-          <div>
-            <p>Tipos</p>
+            <DetailsTipos>Tipos</DetailsTipos>
             <p>
               {actualPokemon.types?.map((type) => (
                 <li key={type}>{type}</li>
