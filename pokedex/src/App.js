@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Router from './routes'
 import useGetPokemons from './services/useGetPokemons'
-
+import {GlobalStyle} from './globalStyles'
 import useGetDetails from './services/useGetDetails'
 
 import { GlobalContext } from './contexts/GlobalContext'
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (pokemons.length > 0) {
-      (async () => {
+      ;(async () => {
         let pokemonsCopy = []
         for (const pokemon of pokemons) {
           let result = await getDetails(pokemon)
@@ -36,8 +36,12 @@ function App() {
     }
   }, [pokemonsDetails])
 
-
-  return <Router />
+  return (
+    <>
+      <Router />
+      <GlobalStyle />
+    </>
+  )
 }
 
 export default App
