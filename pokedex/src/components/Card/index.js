@@ -1,30 +1,35 @@
-import React from 'react'
-import { PokemonCard } from './styles'
-import { useHistory } from 'react-router-dom'
-import { GlobalContext } from '../../contexts/GlobalContext'
+import React from "react";
+import * as S from "./styles";
+import { useHistory } from "react-router-dom";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import DetailsIcon from "../../img/details_icon.svg";
+import PokedexIcon from "../../img/pokedex_icon.svg";
 
 const Card = ({ pokemon, addPokemon, buttonName }) => {
-  const {  } =
-    React.useContext(GlobalContext)
+  const {} = React.useContext(GlobalContext);
 
-  const history = useHistory()
-
+  const history = useHistory();
+  const goToDetails = () => {
+    history.push(`/pokemon/${pokemon.name}`);
+  };
   return (
-    <PokemonCard>
-      <h3>{pokemon?.name}</h3>
-      <img src={pokemon?.img.front} alt={pokemon?.name} />
+    <S.PokemonCard>
       <div>
-        <button
-          onClick={() => addPokemon(pokemon)}
-        >
-          {buttonName}
-        </button>
-        <button onClick={() => history.push(`/pokemon/${pokemon.name}`)}>
-          Mais detalhes
-        </button>
+        <h3 onClick={goToDetails}>{pokemon?.name}</h3>
+        <div>
+          <S.CardButton src={PokedexIcon} onClick={() => addPokemon(pokemon)} atl='Adicionar a Pokédex' />
+          <S.ButtonDetail>
+          <S.CardButton
+            src={DetailsIcon}
+            alt="Detalhes do Pokémon"
+            onClick={goToDetails}
+          />
+          </S.ButtonDetail>
+        </div>
       </div>
-    </PokemonCard>
-  )
-}
+      <img src={pokemon?.img.front} alt={pokemon?.name} onClick={goToDetails} />
+    </S.PokemonCard>
+  );
+};
 
-export default Card
+export default Card;
