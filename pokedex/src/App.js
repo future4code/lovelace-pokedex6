@@ -14,8 +14,12 @@ function App() {
   const [pokemonsDetails, setpokemonsDetails] = useState([])
 
   useEffect(() => {
+    getPokemons()
+  }, [])
+
+  useEffect(() => {
     if (pokemons.length > 0) {
-      ;(async () => {
+      (async () => {
         let pokemonsCopy = []
         for (const pokemon of pokemons) {
           let result = await getDetails(pokemon)
@@ -32,9 +36,7 @@ function App() {
     }
   }, [pokemonsDetails])
 
-  useEffect(() => {
-    getPokemons()
-  }, [])
+
   return <Router />
 }
 

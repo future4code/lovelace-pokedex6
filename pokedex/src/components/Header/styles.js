@@ -7,6 +7,7 @@ export const Header = styled.header`
   align-items: center;
   justify-items: center;
   padding: 0 2rem;
+  text-align: center;
   button {
     :nth-child(1) {
       justify-self: flex-start;
